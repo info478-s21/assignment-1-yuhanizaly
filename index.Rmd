@@ -1,0 +1,122 @@
+---
+title: "Assignment 1"
+author: "Yuhaniz Aly"
+date: "4/23/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+source("analysis.R")
+library(ggplot2)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Describing Metrics
+
+There are many different measurement of disease burden, which includes deaths,
+YLLs, YLDs, DALYS.
+
+**Years of Life Lost (YLLs)** measures the years of potential life lost due to
+premature deaths.  To calculate YLLs for a particular outcome in a population,
+we use the life expectancy for the given age minus the age, multiplied by the
+number of deaths.
+
+**Years Lived with Disability (YLDs)** measures the years of potential life lost
+due to living with a disability. To calculate YLDs for a particular outcome in a
+population, we use the disability weight, which is the magnitude of the
+impairment, multiplied by the number of people living with that impairment in
+that population (prevalence). 
+
+**Disability Adjusted Life Years (DALYs)** is a measure of overall disease
+burden, expressed the years of potential life lost due to ill-health,
+disability, or premature death. DALYs combines mortality and morbidity into one
+metric. To calculate DALYs for a particular outcome in a population, we take the
+sum of the years life lost due to premature deaths (YLLs) and the years life
+lost due to living with a disability (YLDs).
+
+**Disability weights** quantifies the severity of outcomes as percentage
+reduction from perfect health, which are multiplied by prevalent cases.
+Disability weights is measured from a scale of 0 to 1, with 0 implying the
+state in full health and 1 implying a state of death.
+
+**Age-weighting** provides different values to life years lived at different
+ages. Age-weighting assumes that a year of life increases in value until age 22,
+and then decreases. I think age-weighting should be included in the calculations
+of DALYs because I think young adulthood are when people are in their prime
+years of health and less susceptible to contracting a disease that would put
+them close to a near-death situation.
+
+**Discounting** is an adjustment that reduces the burden of early mortality.
+Discounting counts the years of healthy life saved in the present more valuable
+than years of life saved in the future. I think discounting should not be
+included in the calculations of DALYs because of the uncertainty correlating
+with time. Some individuals might want to estimate their personal risk of death
+each year at their own rate and preference, as it may vary from year to year,
+rather than go with the default discount rate.
+
+## Burden by Cause
+This section compares the different measurements of health burden (deaths, YLLs,
+YLDs, DALYs) across causes.
+
+```{r plot2, echo = FALSE, warning=FALSE, fig.width = 12, fig.height = 6}
+cause_patchwork
+```
+The barcharts shows the top 10 causes of the various metrics of health. Based on
+the barcharts, _ischemic heart disease_ is the number one top cause of health 
+burden, as it has the most number of deaths, YLLs, and DALYs. The barchart
+illustrates that ischemic heart disease has significantly more cases of deaths,
+YLLs, and DALYs than any other causes. In contrast, _low back and neck pain_ has
+the most number of YLDs. In fact, ischemic heart disease did not appear to be
+one of the top 10 causes for YLDs. This suggests that many people diagnosed with
+ischemic heart disease tend to die from this disease and that many people lose
+many years of their lifetime, which explains the large number of deaths, YLLs,
+and DALYs. This means there will be fewer people living with ischemic heart
+disease because they do not survive as long. This means there will be less cases
+of people living with ischemic heart disease, which is why ischemic heart
+disease is not a top 10 cause for YLDs. Meanwhile, low back and neck pain cases
+are less severe on people's health and more common in the population, resulting
+YLDs to be more prevalent.
+
+## Burden by Age
+This section compares the different measurements of health burden (deaths, YLLs,
+YLDs, DALYs) across ages between 0 to 80 years old. Note: Children under 5 were
+indicated as age 0 in the graphs.
+
+```{r, echo = FALSE, warning=FALSE, fig.width = 12, fig.height = 6}
+age_patchwork
+```
+The light blue barchart shows that the _number of deaths increases across
+increasing age_, with people over 80 having the most deaths. On the other hand,
+children under 5 have the second most deaths. This is not surprising because we
+can expect an average person’s life expectancy to be around the 80s, though it
+may slightly vary depending on geographic location. Also, children dying before
+the age of 5 is unfortunately common across the world. This accounts for the
+_large number of YLLs and DALYs in the under 5 age group_ because many children
+lost so many years of their potential lifetime from an early death. The graphs
+(light pink and light green barcharts) also show that in the later life, YLLs
+and YLDs leveled off in older age groups. This means they do not have a high
+life expectancy, resulting in a lower YLLs and DALYs value. On the other hand,
+the light yellow barchart shows that
+_the middle age groups, between  30 to 40 years old, tend to have the most YLDs_
+.This is also not surprising because people in this age group tend to be
+affected by health condition at this in their lifetime. The older groups
+(65 years and older) have less YLDs because there not many people who reach this
+age in life, which we can see in the light blue barchart.
+
+## Burden by Sex
+This section compares the different measurements of health burden (deaths, YLLs,
+YLDs, DALYs) across sexes, males and females.
+
+```{r, echo = FALSE, warning=FALSE, fig.width = 12, fig.height = 6}
+sex_patchwork
+```
+Across three of the barcharts (light blue, light pink, and light green), they
+illustrate that
+_males have more number of deaths, YLLs, and DALYs than females_. Whereas in the
+light yellow barchart, _females have more YLDs than males_. This suggest that
+males die more than females and that they lose more years their lifetime from
+the health cause/disease. This also means that more females live the disease or
+disabilty than males and that females do not lose many years of their lifetime
+from the cause than males. Additionally, this may suggest that there are more
+males in the population affected by diseases than females because males die the
+most.
